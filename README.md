@@ -1,66 +1,201 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# Laptop10 (Laravel 10)
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+Dokumentasi ini disusun berdasarkan implementasi yang ada di codebase saat ini.
 
-## About Laravel
+## Ringkasan Aplikasi
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+Aplikasi ini adalah web rekomendasi dan katalog laptop berbasis **Laravel 10**. Pengguna dapat melihat daftar produk dan meminta rekomendasi laptop berdasarkan kriteria sederhana (brand, ukuran layar, dan harga). Tersedia juga area backend untuk mengelola data produk (CRUD).
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+> Catatan: Branding yang muncul di tampilan adalah **"Rizky Comp"**, sementara `.env.example` masih menggunakan `APP_NAME=Laravel`.
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+## Fitur Utama
 
-## Learning Laravel
+- Halaman beranda dengan ringkasan produk.
+- Halaman daftar laptop (`/products`).
+- Form rekomendasi laptop (`/recomendation`).
+- Hasil rekomendasi laptop dengan perhitungan similarity (`/rekomendasi`, method GET).
+- Halaman login admin (`/login`) dan submit login (`/loginprocess`).
+- Dashboard backend (`/dashboard`).
+- CRUD produk melalui resource route `/product`.
+- Upload gambar produk ke `public/images`.
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+## Teknologi yang Digunakan
 
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
+### Backend
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains over 2000 video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+- PHP `^8.1`
+- Laravel Framework `^10.0`
+- Laravel Sanctum `^3.2`
+- Laravel Tinker `^2.8`
+- Guzzle HTTP `^7.2`
 
-## Laravel Sponsors
+### Frontend / Asset
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the Laravel [Patreon page](https://patreon.com/taylorotwell).
+- Vite `^4.0.0`
+- laravel-vite-plugin `^0.7.2`
+- Axios `^1.1.2`
+- Template aset statis frontend: `public/front`
+- Template aset statis backend: `public/back`
 
-### Premium Partners
+## Struktur Direktori Penting
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Cubet Techno Labs](https://cubettech.com)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[Many](https://www.many.co.uk)**
-- **[Webdock, Fast VPS Hosting](https://www.webdock.io/en)**
-- **[DevSquad](https://devsquad.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[OP.GG](https://op.gg)**
-- **[WebReinvent](https://webreinvent.com/?utm_source=laravel&utm_medium=github&utm_campaign=patreon-sponsors)**
-- **[Lendio](https://lendio.com)**
+```text
+app/
+  Http/Controllers/
+    HomeController.php
+    ProductController.php
+  Models/
+    Product.php
+    User.php
 
-## Contributing
+database/
+  migrations/
+    2014_10_12_000000_create_users_table.php
+  seeders/
+    UserSeeder.php
+    DatabaseSeeder.php
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+public/
+  front/
+  back/
+  images/
 
-## Code of Conduct
+resources/views/
+  front/
+  back/
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+routes/
+  web.php
+```
 
-## Security Vulnerabilities
+## Prasyarat
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+- PHP 8.1+
+- Composer
+- Node.js + npm
+- Database MySQL/MariaDB
 
-## License
+## Instalasi Lokal
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+```bash
+git clone https://github.com/Roobbby/Laptop10.git
+cd Laptop10
+
+cp .env.example .env
+composer install
+php artisan key:generate
+
+npm install
+```
+
+## Konfigurasi `.env`
+
+Sesuaikan variabel database berikut di `.env`:
+
+```env
+DB_CONNECTION=mysql
+DB_HOST=127.0.0.1
+DB_PORT=3306
+DB_DATABASE=nama_database
+DB_USERNAME=user_database
+DB_PASSWORD=password_database
+```
+
+Opsional:
+
+- Ubah `APP_NAME` bila ingin menyesuaikan nama aplikasi.
+- Atur `APP_URL` sesuai host lokal Anda.
+
+## Setup Database
+
+Jalankan migrasi:
+
+```bash
+php artisan migrate
+```
+
+Jika ingin memakai seeder user admin bawaan:
+
+```bash
+php artisan db:seed --class=UserSeeder
+```
+
+### Catatan penting terkait skema database
+
+- Pada repository ini hanya tersedia migration untuk tabel `users`.
+- Model/controller menggunakan tabel `products`, namun migration tabel `products` **tidak ditemukan** di codebase saat ini.
+- Sebelum fitur produk/rekomendasi dipakai, pastikan tabel `products` sudah dibuat sesuai field yang dipakai pada `ProductController` dan form backend.
+
+## Menjalankan Aplikasi (Development)
+
+Terminal 1 (Laravel server):
+
+```bash
+php artisan serve
+```
+
+Terminal 2 (Vite dev server):
+
+```bash
+npm run dev
+```
+
+## Build Production Frontend
+
+```bash
+npm run build
+```
+
+## Route & Alur Fitur Utama
+
+Berikut route dari `routes/web.php`:
+
+| Method | URI | Nama Route | Deskripsi |
+|---|---|---|---|
+| GET | `/` | `home` | Beranda + produk ringkas |
+| GET | `/products` | `products` | Daftar laptop |
+| GET | `/recomendation` | `recomendation` | Form input rekomendasi |
+| GET | `/recomendation-result` | `resultrecomendation` | Halaman hasil rekomendasi (versi umum) |
+| GET | `/rekomendasi` | `rekomendasi` | Proses filter & similarity, kirim 3 rekomendasi terbaik |
+| GET | `/login` | `login` | Halaman login admin |
+| POST | `/loginprocess` | `loginprocess` | Submit login |
+| GET/POST/... | `/product` | `product.*` | CRUD produk (resource controller) |
+| GET | `/dashboard` | `dashboard` | Dashboard backend |
+
+## Informasi Login / Demo
+
+Seeder `UserSeeder` menyediakan akun:
+
+- **username**: `admin`
+- **password**: `12345678`
+
+Catatan implementasi saat ini:
+
+- `DatabaseSeeder` belum memanggil `UserSeeder` secara otomatis.
+- Method `loginprocess` belum melakukan validasi autentikasi terhadap database (saat ini langsung mengarahkan ke dashboard).
+
+## Testing
+
+Menjalankan test:
+
+```bash
+php artisan test
+```
+
+Catatan:
+
+- Test bawaan (`tests/Feature/ExampleTest.php`) mengakses route `/`.
+- Karena route `/` mengambil data `Product::all()`, test dapat gagal jika tabel `products` belum tersedia.
+
+## Kontribusi
+
+Kontribusi dipersilakan melalui pull request kecil dan terfokus:
+
+1. Fork repository
+2. Buat branch fitur/perbaikan
+3. Commit perubahan
+4. Buka pull request ke `master`
+
+---
+
+Jika ada bagian yang ingin dipastikan lebih lanjut (misalnya struktur pasti tabel `products`), silakan lengkapi migration terkait agar setup proyek dapat sepenuhnya reproducible.
